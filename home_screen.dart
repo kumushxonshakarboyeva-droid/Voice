@@ -23,7 +23,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   int _tab = 0;
   DateTime _now = DateTime.now();
-  Timer? _clock;
+  Timer? _clockTimer;
   final _search = TextEditingController();
   String _categoryFilter = 'all';
 
@@ -32,14 +32,14 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    _clock = Timer.periodic(const Duration(seconds: 30), (_) {
+    _clockTimer = Timer.periodic(const Duration(seconds: 30), (_) {
       if (mounted) setState(() => _now = DateTime.now());
     });
   }
 
   @override
   void dispose() {
-    _clock?.cancel();
+    _clockTimer?.cancel();
     _search.dispose();
     super.dispose();
   }

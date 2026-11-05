@@ -178,7 +178,7 @@ class _ReminderEditorState extends State<ReminderEditor> {
       dueAt: dueAt,
       hour: _time.hour,
       minute: _time.minute,
-      monthDay: keepMonthlyAnchor ? (old?.monthDay ?? _date.day) : _date.day,
+      monthDay: keepMonthlyAnchor ? old.monthDay : _date.day,
       recurrence: _recurrence,
       weekdays: _recurrence == ReminderRecurrence.weekly
           ? (List<int>.of(_weekdays)..sort())
