@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
-import 'screens/home_screen.dart';
-import 'services/app_controller.dart';
+import 'home_screen.dart';
+import 'app_controller.dart';
 
 class VoiceLifeApp extends StatelessWidget {
   const VoiceLifeApp({super.key, required this.controller});
