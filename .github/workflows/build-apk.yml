@@ -11,6 +11,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Unpack project
+        run: |
+          unzip -q -o voice-life-project.zip
+          ls voice-life
+
       - uses: actions/setup-java@v4
         with:
           distribution: temurin
@@ -21,28 +26,27 @@ jobs:
           flutter-version: "3.29.3"
           channel: stable
           cache: true
-
-      - name: Move loose Dart files into lib/
-        run: |
-          mkdir -p lib
-          mv -f ./*.dart lib/ 2>/dev/null || true
-          ls lib
+          cache-dependency-path: voice-life/pubspec.yaml
 
       - name: Install dependencies
+        working-directory: voice-life
         run: flutter pub get
 
       - name: Analyze (does not block the build)
+        working-directory: voice-life
         run: flutter analyze
         continue-on-error: true
 
       - name: Unit tests (does not block the build)
+        working-directory: voice-life
         run: flutter test
         continue-on-error: true
 
       - name: Build debug APK
+        working-directory: voice-life
         run: flutter build apk --debug
 
       - uses: actions/upload-artifact@v4
         with:
           name: voice-life-debug-apk
-          path: build/app/outputs/flutter-apk/app-debug.apk
+          path: voice-life/build/app/outputs/flutter-apk/app-debug.apk
